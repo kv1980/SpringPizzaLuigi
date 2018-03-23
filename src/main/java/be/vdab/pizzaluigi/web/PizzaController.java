@@ -1,18 +1,32 @@
 package be.vdab.pizzaluigi.web;
 
-import java.util.List;
-import java.util.Arrays;
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.vdab.pizzaluigi.entities.Pizza;
+
 @Controller
 @RequestMapping("pizzas")
 class PizzaController {
 	private final static String PIZZAS_VIEW = "pizzas";
-	private final List<String> pizzas = Arrays.asList("Prosciutto","Margherita","Calzone");
+//	private final List<Pizza> pizzas = Arrays.asList(
+//			new Pizza(12,"Prosciutto",BigDecimal.valueOf(4),true),
+//			new Pizza(14,"Margherita",BigDecimal.valueOf(5),false),
+//			new Pizza(17,"Calzone",BigDecimal.valueOf(4),false));
+	private final Map<Long,Pizza> pizzas = new LinkedHashMap<>();
+	
+	PizzaController(){
+		pizzas.put(12L, new Pizza(12,"Prosciutto",BigDecimal.valueOf(4),true));
+		pizzas.put(14L, new Pizza(14,"Margherita",BigDecimal.valueOf(5),false));
+		pizzas.put(17L, new Pizza(17,"Calzone",BigDecimal.valueOf(4),false));
+		pizzas.put(23L, new Pizza(17,"Fungi & Olive",BigDecimal.valueOf(5),false));
+	}
 	
 	@GetMapping
 	ModelAndView pizzas() {

@@ -4,16 +4,35 @@
 <!doctype html>
 <html lang='nl'>
 	<head>
-		<title>Pizza's</title>
-		<link rel='icon' href='images/pizza.ico' type='image/x-icon'>
-		<meta name='viewport' content='width=device-width,initial-scale=1'>
-		<link rel='stylesheet' href='css/pizzaluigi.css'>
+		<c:import url='/WEB-INF/JSP/head.jsp'>
+ 			<c:param name='title' value="Pizza Luigi's soorten"/>
+		</c:import>
 	</head>
 	<body>
+		<c:import url='/WEB-INF/JSP/menu.jsp'/>
 		<h1>Pizza's</h1>
+		<c:forEach var='index' begin='1' end='4'>
+			&#9733; <%-- de HTML code van een symbool ster --%>
+		</c:forEach>
 		<ul class='zebra'>
-			<c:forEach var='pizza' items='${pizzas}'>
-			<li>${pizza}</li>
+			<c:forEach var='entry' items='${pizzas}'>
+			<li>${entry.key} : <c:out value='${entry.value.naam}'/> ${entry.value.naam} ${entry.value.prijs} &euro; 
+				${entry.value.pikant ? "&#9889; PIKANT &#9889" : " niet pikant"} 
+
+<!-- alternatief voor keuze pikant
+				<c:if test='${entry.value.pikant}'> &#9889; PIKANT &#9889 </c:if>
+-->			
+<!-- alternatief voor keuze pikant
+				<c:choose> 
+ 					<c:when test='${entry.value.pikant}'>&#9889; PIKANT &#9889;</c:when>
+					<c:otherwise> niet pikant </c:otherwise>
+ 				</c:choose>	 
+-->			
+				<c:url var='url' value='/pizzas/detail'>
+					<c:param name='id' value='${entry.key}'/>
+				</c:url>
+				<a href='${url}'>Detail</a>
+			 </li>
 			</c:forEach>	
 		</ul>
 	</body>
