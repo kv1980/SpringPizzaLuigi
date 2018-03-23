@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang='nl'>
 <head>
 	<title>Pizza Luigi</title>
 	<link rel='icon' href='images/pizza.ico' type='images/x-icon'>
@@ -12,6 +11,7 @@
 	<h1>Pizza Luigi</h1>
 	<img src='images/pizza.jpg' alt='pizza' class='fullwidth'>
 	<h2>${boodschap}</h2>
+	<h2>De zaakvoerder</h2>
 	<dl>
 		<dt>Naam</dt><dd>${zaakvoerder.naam}</dd>
 		<dt>Aantal kinderen</dt><dd>${zaakvoerder.aantalKinderen}</dd>

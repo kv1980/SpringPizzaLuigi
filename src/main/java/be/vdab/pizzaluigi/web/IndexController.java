@@ -10,10 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 import be.vdab.pizzaluigi.valueobjects.Adres;
 import be.vdab.pizzaluigi.valueobjects.Persoon;
 
-@Controller //@RestController indien er geen JSP bij hoort
-@RequestMapping("/")
+@Controller 				// @RestController indien er geen JSP bij hoort
+@RequestMapping("/") 		// andere url kan zijn "pizzaluigi.be/producten"
 class IndexController {
-	@GetMapping
+	@GetMapping 			// voor GET requests
 	ModelAndView index() {
 		String boodschap;
 		int uur = LocalTime.now().getHour();
