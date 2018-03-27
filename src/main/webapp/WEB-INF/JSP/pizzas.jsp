@@ -1,5 +1,6 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
+<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 
 <!doctype html>
 <html lang='nl'>
@@ -18,9 +19,9 @@
 			<c:forEach var='entry' items='${pizzas}'>
 			<li>${entry.key} : <c:out value='${entry.value.naam}'/> ${entry.value.prijs} &euro; 
 				${entry.value.pikant ? "&#9889; PIKANT &#9889;" : " niet pikant"} 
-				<c:url var='url' value='/pizzas'>
-					<c:param name='id' value='${entry.key}'/>
-				</c:url>
+				<spring:url value='pizzas/{id}' var='url'>
+					<spring:param name='id' value='${entry.key}'/>
+				</spring:url>
 				<a href='${url}'>Detail</a>
 			 </li>
 			</c:forEach>	
