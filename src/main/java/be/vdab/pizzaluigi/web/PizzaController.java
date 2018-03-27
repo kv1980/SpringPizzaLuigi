@@ -12,13 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import be.vdab.pizzaluigi.entities.Pizza;
 
 @Controller
-@RequestMapping("pizzas/all")
+@RequestMapping("pizzas")
 class PizzaController {
 	private final static String PIZZAS_VIEW = "pizzas";
-//	private final List<Pizza> pizzas = Arrays.asList(
-//			new Pizza(12,"Prosciutto",BigDecimal.valueOf(4),true),
-//			new Pizza(14,"Margherita",BigDecimal.valueOf(5),false),
-//			new Pizza(17,"Calzone",BigDecimal.valueOf(4),false));
+	private final static String PIZZA_VIEW = "pizza";
 	private final Map<Long,Pizza> pizzas = new LinkedHashMap<>();
 	
 	PizzaController(){
@@ -31,5 +28,10 @@ class PizzaController {
 	@GetMapping
 	ModelAndView pizzas() {
 		return new ModelAndView(PIZZAS_VIEW,"pizzas",pizzas);
+	}
+	
+	@GetMapping(params = "id")
+	ModelAndView pizza(long id) {
+		return new ModelAndView(PIZZA_VIEW,"pizza",pizzas.get(id));
 	}
 }

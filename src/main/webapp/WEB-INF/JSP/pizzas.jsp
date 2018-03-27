@@ -16,19 +16,9 @@
 		</c:forEach>
 		<ul class='zebra'>
 			<c:forEach var='entry' items='${pizzas}'>
-			<li>${entry.key} : <c:out value='${entry.value.naam}'/> ${entry.value.naam} ${entry.value.prijs} &euro; 
-				${entry.value.pikant ? "&#9889; PIKANT &#9889" : " niet pikant"} 
-
-<!-- alternatief voor keuze pikant
-				<c:if test='${entry.value.pikant}'> &#9889; PIKANT &#9889 </c:if>
--->			
-<!-- alternatief voor keuze pikant
-				<c:choose> 
- 					<c:when test='${entry.value.pikant}'>&#9889; PIKANT &#9889;</c:when>
-					<c:otherwise> niet pikant </c:otherwise>
- 				</c:choose>	 
--->			
-				<c:url var='url' value='/pizzas/detail'>
+			<li>${entry.key} : <c:out value='${entry.value.naam}'/> ${entry.value.prijs} &euro; 
+				${entry.value.pikant ? "&#9889; PIKANT &#9889;" : " niet pikant"} 
+				<c:url var='url' value='/pizzas'>
 					<c:param name='id' value='${entry.key}'/>
 				</c:url>
 				<a href='${url}'>Detail</a>
