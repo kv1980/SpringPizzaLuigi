@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import be.vdab.pizzaluigi.entities.Pizza;
 
 @Controller
-@RequestMapping("pizzas")
+@RequestMapping("pizzas/all")
 class PizzaController {
 	private final static String PIZZAS_VIEW = "pizzas";
 //	private final List<Pizza> pizzas = Arrays.asList(
