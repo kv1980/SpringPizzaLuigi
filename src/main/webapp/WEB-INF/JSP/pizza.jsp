@@ -14,7 +14,8 @@
 	<dl>
 		<dt>Nummer</dt><dd>${pizza.id}</dd>
 		<dt>Naam</dt><dd>${pizza.naam}</dd>
-		<dt>Prijs</dt><dd>${pizza.prijs}</dd>
+		<dt>Prijs in Euro</dt><dd>${pizza.prijs}</dd>
+		<dt>Prijs in Dollar</dt><dd>${inDollar}</dd>
 		<dt>Pikant</dt><dd>${pizza.pikant ? 'ja' : 'neen'}</dd>
 	</dl>
 </body>

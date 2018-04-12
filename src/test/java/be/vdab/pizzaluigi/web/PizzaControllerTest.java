@@ -3,16 +3,23 @@ package be.vdab.pizzaluigi.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.web.servlet.ModelAndView;
+
+import be.vdab.pizzaluigi.services.EuroService;
 
 public class PizzaControllerTest {
 	private PizzaController controller;
+	private EuroService dummyEuroService;
 	
 	@Before
 	public void before() {
-		controller = new PizzaController();
+		dummyEuroService = Mockito.mock(EuroService.class);
+		controller = new PizzaController(dummyEuroService);
 	}
 	
 	@Test
@@ -29,13 +36,15 @@ public class PizzaControllerTest {
 	
 	@Test
 	public void pizzaWerktSamenMetDeJuisteJSP() {
-		ModelAndView modelAndView = controller.pizza(1);
+		System.out.println("kiekeboe");
+		ModelAndView modelAndView = controller.pizza(12);
+		System.out.println("***"+modelAndView.getViewName());
 		assertEquals("pizza",modelAndView.getViewName());
 	}
 	
 	@Test
 	public void pizzaGeeftPizzasAanJSP() {
-		ModelAndView modelAndView = controller.pizza(1);
+		ModelAndView modelAndView = controller.pizza(12);
 		assertTrue(modelAndView.getModel().containsKey("pizza"));
 	}
 
