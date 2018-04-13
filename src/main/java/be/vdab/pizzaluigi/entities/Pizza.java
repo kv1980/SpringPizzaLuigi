@@ -11,6 +11,10 @@ public class Pizza {
 	public Pizza() {
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public Pizza(long id, String naam, BigDecimal prijs, boolean pikant) {
 		this.id = id;
 		this.naam = naam;
