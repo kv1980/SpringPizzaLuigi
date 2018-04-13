@@ -3,8 +3,6 @@ package be.vdab.pizzaluigi.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -36,9 +34,7 @@ public class PizzaControllerTest {
 	
 	@Test
 	public void pizzaWerktSamenMetDeJuisteJSP() {
-		System.out.println("kiekeboe");
 		ModelAndView modelAndView = controller.pizza(12);
-		System.out.println("***"+modelAndView.getViewName());
 		assertEquals("pizza",modelAndView.getViewName());
 	}
 	
