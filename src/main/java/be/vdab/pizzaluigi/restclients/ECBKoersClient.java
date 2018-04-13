@@ -14,6 +14,7 @@ import javax.xml.stream.XMLStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import be.vdab.pizzaluigi.exceptions.KoersClientException;
@@ -24,17 +25,11 @@ import be.vdab.pizzaluigi.exceptions.KoersClientException;
 @Qualifier("ECB")
 public class ECBKoersClient implements KoersClient{
 	private final static Logger LOGGER = LoggerFactory.getLogger(ECBKoersClient.class);
-	private URL url;
+	private final URL url;
 	
-	ECBKoersClient(){
-		try {
-			this.url = new URL("http://www.ecb.eu/stats/eurofxref/eurofxref-daily.xml");
-		} catch (MalformedURLException ex) {
-			String fout = "ECB URL is verkeerd: "+url;
-			LOGGER.error(fout,ex);
-			throw new KoersClientException(fout);
+	ECBKoersClient(@Value("${ECBKoersURL}") URL url) { 
+		this.url = url; 
 		}
-	}
 
 	@Override
 	public BigDecimal getDollarKoers() {
