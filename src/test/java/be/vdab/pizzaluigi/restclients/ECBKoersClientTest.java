@@ -15,11 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ECBKoersClientTest {
 	@Autowired private ECBKoersClient client;
 
-/*	@Before
-	public void before() {
-		client = new ECBKoersClient();
-	}*/
-
 	@Test
 	public void deKoersMoetPositiefZijn() {
 		assertTrue(client.getDollarKoers().compareTo(BigDecimal.ZERO)>0);

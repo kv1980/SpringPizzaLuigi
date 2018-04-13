@@ -3,7 +3,6 @@ package be.vdab.pizzaluigi.restclients;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.stream.XMLInputFactory;
@@ -27,7 +26,7 @@ public class ECBKoersClient implements KoersClient{
 	private final static Logger LOGGER = LoggerFactory.getLogger(ECBKoersClient.class);
 	private final URL url;
 	
-	ECBKoersClient(@Value("${ECBKoersURL}") URL url) { 
+	ECBKoersClient(@Value("${ecbKoersURL}") URL url) { 
 		this.url = url; 
 		}
 
