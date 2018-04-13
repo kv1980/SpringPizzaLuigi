@@ -8,11 +8,14 @@ import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import be.vdab.pizzaluigi.exceptions.KoersClientException;
 
+
 @Component
+@Qualifier("Fixer")
 class FixerKoersClient implements KoersClient {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FixerKoersClient.class);
 	private URL url;
@@ -33,6 +36,7 @@ class FixerKoersClient implements KoersClient {
 			String lijn = scanner.nextLine();
 			int beginPositieKoers = lijn.indexOf("USD")+5;
 			int eindPositieKoers = lijn.indexOf("}",beginPositieKoers);
+			LOGGER.info("koers gelezen via Fixer");
 			return new BigDecimal(lijn.substring(beginPositieKoers, eindPositieKoers));
 		} catch (IOException | NumberFormatException ex) {
 			String fout = "De koers kan niet uit Fixer worden gelezen.";

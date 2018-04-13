@@ -3,6 +3,7 @@ package be.vdab.pizzaluigi.services;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import be.vdab.pizzaluigi.restclients.KoersClient;
@@ -11,7 +12,7 @@ import be.vdab.pizzaluigi.restclients.KoersClient;
 class DefaultEuroService implements EuroService {
 private final KoersClient koersClient;
 
-DefaultEuroService(KoersClient koersClient){
+DefaultEuroService(@Qualifier("Fixer") KoersClient koersClient){
 	this.koersClient = koersClient;
 	}
 
