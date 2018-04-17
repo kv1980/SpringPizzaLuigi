@@ -5,18 +5,21 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.pizzaluigi.services.EuroService;
 
+
+@RunWith(MockitoJUnitRunner.class)
 public class PizzaControllerTest {
 	private PizzaController controller;
-	private EuroService dummyEuroService;
+	@Mock private EuroService dummyEuroService;
 	
 	@Before
 	public void before() {
-		dummyEuroService = Mockito.mock(EuroService.class);
 		controller = new PizzaController(dummyEuroService);
 	}
 	

@@ -20,15 +20,16 @@ import be.vdab.pizzaluigi.exceptions.PizzaNietGevondenException;
 
 @Repository
 public class JdbcPizzaRepository implements PizzaRepository {
+	
 	private final NamedParameterJdbcTemplate template;	
 	private final SimpleJdbcInsert insert;
+	
 	private final RowMapper<Pizza> pizzaRowMapper = (resultSet,rowNum) -> 
 		new Pizza(resultSet.getLong("id"),resultSet.getString("naam"),resultSet.getBigDecimal("prijs"),resultSet.getBoolean("pikant"));
-	private final RowMapper<BigDecimal> prijsRowMapper = (resultSet,rowNum) -> resultSet.getBigDecimal("prijs");
-		
+	private final RowMapper<BigDecimal> prijsRowMapper = (resultSet,rowNum) -> resultSet.getBigDecimal("prijs");		
 	private static final String READ = "select id, naam, prijs, pikant from pizzas where id=:id";
 	private static final String UPDATE_PIZZA = "update pizzas set naam=:naam, prijs=:prijs, pikant=:pikant where id=:id";
-	private static final String DELETE_PIZZA = "deleted from pizzas where id=:id";
+	private static final String DELETE_PIZZA = "delete from pizzas where id=:id";
 	
 	private static final String SELECT_ALL = "select id, naam, prijs, pikant from pizzas order by id";
 	private static final String SELECT_BY_PRIJS_BETWEEN = "select id, naam, prijs, pikant from pizzas "
@@ -38,13 +39,14 @@ public class JdbcPizzaRepository implements PizzaRepository {
 	private static final String SELECT_BY_PRIJS = "select id, naam, prijs, pikant from pizzas "
 			+" where prijs= :prijs";
 
+	
 	public JdbcPizzaRepository(NamedParameterJdbcTemplate template, DataSource dataSource) {
 		this.template = template;
 		this.insert = new SimpleJdbcInsert(dataSource);
 		insert.withTableName("pizzas");
 		insert.usingGeneratedKeyColumns("id");
 	}
-
+	
 	@Override
 	public void create(Pizza pizza) {
 		Map<String, Object> kolomWaarden = new HashMap<>();

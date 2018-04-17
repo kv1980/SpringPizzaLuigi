@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest
 @Import(ECBKoersClient.class)
 @PropertySource("application.properties")
 public class ECBKoersClientTest {
