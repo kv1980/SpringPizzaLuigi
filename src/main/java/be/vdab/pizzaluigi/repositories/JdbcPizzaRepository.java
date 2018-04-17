@@ -35,6 +35,8 @@ public class JdbcPizzaRepository implements PizzaRepository {
 			+ " where prijs between :van and :tot order by prijs";
 	private static final String SELECT_AANTAL_PIZZAS = "select count(*) from pizzas";
 	private static final String SELECT_UNIEKE_PRIJZEN = "select distinct prijs from pizzas order by prijs";
+	private static final String SELECT_BY_PRIJS = "select id, naam, prijs, pikant from pizzas "
+			+" where prijs= :prijs";
 
 	public JdbcPizzaRepository(NamedParameterJdbcTemplate template, DataSource dataSource) {
 		this.template = template;
@@ -100,14 +102,12 @@ public class JdbcPizzaRepository implements PizzaRepository {
 
 	@Override
 	public List<BigDecimal> findUniekePrijzen() {
-		// TODO Auto-generated method stub
-		return null;
+		return template.query(SELECT_UNIEKE_PRIJZEN, prijsRowMapper);
 	}
 
 	@Override
 	public List<Pizza> findByPrijs(BigDecimal prijs) {
-		// TODO Auto-generated method stub
-		return null;
+		return template.query(SELECT_BY_PRIJS, Collections.singletonMap("prijs",prijs), pizzaRowMapper);
 	}
 
 }
