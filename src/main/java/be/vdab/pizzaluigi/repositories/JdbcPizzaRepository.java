@@ -9,19 +9,32 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import be.vdab.pizzaluigi.entities.Pizza;
+import be.vdab.pizzaluigi.exceptions.PizzaNietGevondenException;
 
 @Repository
 public class JdbcPizzaRepository implements PizzaRepository {
-	private final NamedParameterJdbcTemplate template;
+	private final NamedParameterJdbcTemplate template;	
 	private final SimpleJdbcInsert insert;
-	private static final String SELECT_AANTAL_PIZZAS = "select count(*) from pizzas";
-	private static final String DELETE_PIZZA = "deleted from pizzas where id=:id";
+	private final RowMapper<Pizza> pizzaRowMapper = (resultSet,rowNum) -> 
+		new Pizza(resultSet.getLong("id"),resultSet.getString("naam"),resultSet.getBigDecimal("prijs"),resultSet.getBoolean("pikant"));
+	private final RowMapper<BigDecimal> prijsRowMapper = (resultSet,rowNum) -> resultSet.getBigDecimal("prijs");
+		
+	private static final String READ = "select id, naam, prijs, pikant from pizzas where id=:id";
 	private static final String UPDATE_PIZZA = "update pizzas set naam=:naam, prijs=:prijs, pikant=:pikant where id=:id";
+	private static final String DELETE_PIZZA = "deleted from pizzas where id=:id";
+	
+	private static final String SELECT_ALL = "select id, naam, prijs, pikant from pizzas order by id";
+	private static final String SELECT_BY_PRIJS_BETWEEN = "select id, naam, prijs, pikant from pizzas "
+			+ " where prijs between :van and :tot order by prijs";
+	private static final String SELECT_AANTAL_PIZZAS = "select count(*) from pizzas";
+	private static final String SELECT_UNIEKE_PRIJZEN = "select distinct prijs from pizzas order by prijs";
 
 	public JdbcPizzaRepository(NamedParameterJdbcTemplate template, DataSource dataSource) {
 		this.template = template;
@@ -29,8 +42,6 @@ public class JdbcPizzaRepository implements PizzaRepository {
 		insert.withTableName("pizzas");
 		insert.usingGeneratedKeyColumns("id");
 	}
-	
-	
 
 	@Override
 	public void create(Pizza pizza) {
@@ -44,8 +55,11 @@ public class JdbcPizzaRepository implements PizzaRepository {
 
 	@Override
 	public Optional<Pizza> read(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return Optional.of(template.queryForObject(READ,Collections.singletonMap("id", id),pizzaRowMapper));
+		} catch (IncorrectResultSizeDataAccessException ex) {
+			return Optional.empty();
+		}
 	}
 
 	@Override
@@ -55,8 +69,9 @@ public class JdbcPizzaRepository implements PizzaRepository {
 		parameters.put("prijs", pizza.getPrijs());
 		parameters.put("pikant", pizza.isPikant());
 		parameters.put("id",pizza.getId());
-		template.update(UPDATE_PIZZA, parameters);
-		
+		if (template.update(UPDATE_PIZZA, parameters) == 0) {
+			throw new PizzaNietGevondenException();
+		};
 	}
 
 	@Override
@@ -67,14 +82,15 @@ public class JdbcPizzaRepository implements PizzaRepository {
 
 	@Override
 	public List<Pizza> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return template.query(SELECT_ALL,  pizzaRowMapper);
 	}
 
 	@Override
 	public List<Pizza> findByPrijsBetween(BigDecimal vanPrijs, BigDecimal totPrijs) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String,Object> parameters = new HashMap<>();
+		parameters.put("van",vanPrijs);
+		parameters.put("tot",totPrijs);
+		return template.query(SELECT_BY_PRIJS_BETWEEN,parameters,pizzaRowMapper);
 	}
 
 	@Override
