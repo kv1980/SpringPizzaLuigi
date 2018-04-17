@@ -1,8 +1,11 @@
 package be.vdab.pizzaluigi.repositories;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
@@ -39,11 +42,11 @@ public class JdbcPizzaRepository implements PizzaRepository {
 		pizza.setId(id.longValue());
 	}
 
-//	@Override
-//	public Optional<Pizza> read(long id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public Optional<Pizza> read(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public void update(Pizza pizza) {
@@ -62,33 +65,33 @@ public class JdbcPizzaRepository implements PizzaRepository {
 		
 	}
 
-//	@Override
-//	public List<Pizza> findAll() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<Pizza> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-//	@Override
-//	public List<Pizza> findByPrijsBetween(BigDecimal vanPrijs, BigDecimal totPrijs) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<Pizza> findByPrijsBetween(BigDecimal vanPrijs, BigDecimal totPrijs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public long findAantalPizzas() {
 		return template.queryForObject(SELECT_AANTAL_PIZZAS,Collections.emptyMap(),Long.class);
 	}
 
-//	@Override
-//	public List<BigDecimal> findUniekePrijzen() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<BigDecimal> findUniekePrijzen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-//	@Override
-//	public List<Pizza> findByPrijs(BigDecimal prijs) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<Pizza> findByPrijs(BigDecimal prijs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
