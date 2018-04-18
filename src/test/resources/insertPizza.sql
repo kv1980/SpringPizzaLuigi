@@ -1,1 +1,1 @@
-insert into pizzas(naam,prijs,pikant) values('test',10,false)
+insert into pizzas(naam,prijs,pikant) values('test',BigDecimal.TEN,false)

@@ -33,7 +33,7 @@ public class JdbcRepositoryTest extends AbstractTransactionalJUnit4SpringContext
 	//private long ideetje = super.jdbcTemplate.queryForObject("select id from pizzas where naam = 'test'",Long.class);
 	
 	private long idVanTestPizza() {
-		return super.jdbcTemplate.queryForObject("select id from pizzas where naam='test'", Long.class);
+		return super.jdbcTemplate.queryForObject("select id from pizza where naam='test'", Long.class);
 	}
 	
 	@Test

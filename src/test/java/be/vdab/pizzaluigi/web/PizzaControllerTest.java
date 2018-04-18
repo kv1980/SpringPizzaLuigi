@@ -11,12 +11,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.pizzaluigi.services.EuroService;
+import be.vdab.pizzaluigi.services.PizzaService;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class PizzaControllerTest {
 	private PizzaController controller;
-	@Mock private EuroService dummyEuroService;
+	@Mock 
+	private EuroService dummyEuroService;
+	@Mock 
+	private PizzaService dummyPizzaService;
 	
 	@Before
 	public void before() {
