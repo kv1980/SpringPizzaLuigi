@@ -2,6 +2,10 @@ package be.vdab.pizzaluigi.web;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.vdab.pizzaluigi.entities.Pizza;
 import be.vdab.pizzaluigi.services.EuroService;
 import be.vdab.pizzaluigi.services.PizzaService;
 
@@ -24,7 +29,9 @@ public class PizzaControllerTest {
 	
 	@Before
 	public void before() {
-		controller = new PizzaController(dummyEuroService);
+		when(dummyPizzaService.read(1))
+			.thenReturn(Optional.ofNullable(new Pizza(1,"test",BigDecimal.ONE,true)));
+		controller = new PizzaController(dummyEuroService,dummyPizzaService);
 	}
 	
 	@Test

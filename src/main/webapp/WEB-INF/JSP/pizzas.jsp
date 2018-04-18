@@ -16,9 +16,9 @@
 			&#9733; <%-- de HTML code van een symbool ster --%>
 		</c:forEach>
 		<ul class='zebra'>
-			<c:forEach var='entry' items='${pizzas}'>
-			<li>${entry.key} : <c:out value='${entry.value.naam}'/> ${entry.value.prijs} &euro; 
-				${entry.value.pikant ? "&#9889; PIKANT &#9889;" : " niet pikant"} 
+			<c:forEach var='pizza' items='${pizzas}'>
+			<li>${pizza.id} : <c:out value='${pizza.naam}'/> ${pizza.prijs} &euro; 
+				${pizza.pikant ? "&#9889; PIKANT &#9889;" : " niet pikant"} 
 				<spring:url value='pizzas/{id}' var='url'>
 					<spring:param name='id' value='${entry.key}'/>
 				</spring:url>
