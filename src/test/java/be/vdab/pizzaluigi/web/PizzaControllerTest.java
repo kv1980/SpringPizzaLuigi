@@ -1,6 +1,7 @@
 package be.vdab.pizzaluigi.web;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -35,27 +36,32 @@ public class PizzaControllerTest {
 	}
 	
 	@Test
-	public void pizzasWerktSamenMetDeJuisteJSP() {
+	public void pizzasWerktSamenMetPizzasDotJSP() {
 		ModelAndView modelAndView = controller.pizzas();
 		assertEquals("pizzas",modelAndView.getViewName());
 	}
 	
 	@Test
-	public void pizzasGeeftPizzasAanJSP() {
+	public void pizzasGeeftPizzasAanPizzasDotJSP() {
 		ModelAndView modelAndView = controller.pizzas();
 		assertTrue(modelAndView.getModel().containsKey("pizzas"));
 	}
 	
 	@Test
-	public void pizzaWerktSamenMetDeJuisteJSP() {
-		ModelAndView modelAndView = controller.pizza(12);
+	public void pizzaWerktSamenMetPizzaDotJSP() {
+		ModelAndView modelAndView = controller.pizza(1);
 		assertEquals("pizza",modelAndView.getViewName());
 	}
 	
 	@Test
-	public void pizzaGeeftPizzasAanJSP() {
-		ModelAndView modelAndView = controller.pizza(12);
+	public void pizzaGeeftPizzaAanPizzaDotJSP() {
+		ModelAndView modelAndView = controller.pizza(1);
 		assertTrue(modelAndView.getModel().containsKey("pizza"));
 	}
-
+	
+	@Test   
+	public void onbestaandePizza() {     
+		ModelAndView modelAndView = controller.pizza(-1);     
+		assertFalse(modelAndView.getModel().containsKey("pizza"));   
+	} 
 }

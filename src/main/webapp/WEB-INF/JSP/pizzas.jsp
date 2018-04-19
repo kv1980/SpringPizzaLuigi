@@ -20,7 +20,7 @@
 			<li>${pizza.id} : <c:out value='${pizza.naam}'/> ${pizza.prijs} &euro; 
 				${pizza.pikant ? "&#9889; PIKANT &#9889;" : " niet pikant"} 
 				<spring:url value='pizzas/{id}' var='url'>
-					<spring:param name='id' value='${entry.key}'/>
+					<spring:param name='id' value='${pizza.id}'/>
 				</spring:url>
 				<a href='${url}'>Detail</a>
 			 </li>
