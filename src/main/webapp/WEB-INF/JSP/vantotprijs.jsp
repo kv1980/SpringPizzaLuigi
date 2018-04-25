@@ -19,7 +19,7 @@
 		<form:input path='van' autofocus='autofocus'/>
 		<form:label path='tot'>Tot: <form:errors path='tot'/></form:label>
 		<form:input path='tot'/>
-		<input type='submit' value='zoeken'>
+		<input type='submit' value='zoeken'><form:errors cssClass='fout'/>
 	</form:form>	
 	<c:if test='${not empty pizzas}'>
 		<ul>

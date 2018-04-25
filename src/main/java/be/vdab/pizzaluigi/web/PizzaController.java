@@ -1,6 +1,7 @@
 package be.vdab.pizzaluigi.web;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.vdab.pizzaluigi.entities.Pizza;
 import be.vdab.pizzaluigi.services.EuroService;
 import be.vdab.pizzaluigi.services.PizzaService;
 
@@ -58,15 +60,22 @@ class PizzaController {
 	ModelAndView vantotprijsVoorSubmit() {
 		VanTotPrijsForm form = new VanTotPrijsForm();
 		form.setVan(BigDecimal.ZERO);
-		form.setTot(BigDecimal.ZERO);
+		form.setTot(BigDecimal.TEN);
 		return new ModelAndView(VAN_TOT_PRIJS_VIEW).addObject(form);
 	}
 	
 	@GetMapping(params= {"van","tot"})
 	ModelAndView vantotprijsNaSubmit(VanTotPrijsForm form,BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView(VAN_TOT_PRIJS_VIEW);
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView(VAN_TOT_PRIJS_VIEW);
+			return modelAndView;
 		}
-		return new ModelAndView(VAN_TOT_PRIJS_VIEW,"pizzas",pizzaService.findByPrijsBetween(form.getVan(),form.getTot()));
+		List<Pizza> pizzas = pizzaService.findByPrijsBetween(form.getVan(),form.getTot());
+		if (pizzas.isEmpty()) {
+			bindingResult.reject("geenPizzas");
+		} else {
+			modelAndView.addObject("pizzas",pizzas);
+		}
+		return modelAndView;
 	}
 }
