@@ -1,10 +1,16 @@
 package be.vdab.pizzaluigi.valueobjects;
 
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.Range;
+
 public class Persoon {
 	private String voornaam;
 	private String familienaam;
+	@Range(min = 0, max = 69)
 	private int aantalKinderen;
 	private boolean gehuwd;
+	@Valid
 	private Adres adres;
 
 	public Persoon() {

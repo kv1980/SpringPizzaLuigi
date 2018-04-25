@@ -1,11 +1,16 @@
 package be.vdab.pizzaluigi.valueobjects;
 
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.Range;
+
 public class Adres {
 	private String straat;
 	private String huisNr;
+	@Range(min=1000,max=9999)
 	private int postcode;
 	private String gemeente;
-	
+	@Valid
 	public Adres() {
 	}
 
