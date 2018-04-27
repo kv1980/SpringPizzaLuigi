@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -64,4 +66,16 @@ public class PizzaControllerTest {
 		ModelAndView modelAndView = controller.pizza(-1);     
 		assertFalse(modelAndView.getModel().containsKey("pizza"));   
 	} 
+	
+	@Test
+	public void prijzenWerktSamenMetPrijzenDotJSP() {
+		ModelAndView modelAndView = controller.prijzen();
+		assertEquals("prijzen",modelAndView.getViewName());
+	}
+	
+	@Test
+	public void prijzenGeeftUniekePrijzenDoorAanPrijzenDotJSP() {
+		ModelAndView modelAndView = controller.prijzen();
+		assertTrue(modelAndView.getModel().containsKey("prijzen"));
+	}
 }

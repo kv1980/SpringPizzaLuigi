@@ -16,9 +16,9 @@
 	<c:url value='/pizzas' var='url'/>
 	<form:form action='${url}' modelAttribute='vanTotPrijsForm' method='get'> 
 		<form:label path='van'>Van: <form:errors path='van'/></form:label>
-		<form:input path='van' autofocus='autofocus'/>
+		<form:input path='van' autofocus='autofocus' type='number' required='required' min='0'/>
 		<form:label path='tot'>Tot: <form:errors path='tot'/></form:label>
-		<form:input path='tot'/>
+		<form:input path='tot' type='number' required='required' min='0'/>
 		<input type='submit' value='zoeken'><form:errors cssClass='fout'/>
 	</form:form>	
 	<c:if test='${not empty pizzas}'>
