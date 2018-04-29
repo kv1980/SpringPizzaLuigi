@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,8 @@ class PizzaController {
 	private final static String PIZZA_VIEW = "pizza";
 	private final static String PRIJZEN_VIEW = "prijzen";
 	private final static String VAN_TOT_PRIJS_VIEW = "vantotprijs";
+	private final static String TOEVOEGEN_VIEW ="toevoegen";
+	private final static String REDIRECT_URL_NA_TOEVOEGEN="redirect:/pizzas";
 	private final EuroService euroService;
 	private final PizzaService pizzaService;
 	
@@ -79,5 +82,19 @@ class PizzaController {
 			modelAndView.addObject("pizzas",pizzas);
 		}
 		return modelAndView;
+	}
+	
+	@GetMapping("toevoegen")
+	ModelAndView toevoegen() {
+		return new ModelAndView(TOEVOEGEN_VIEW).addObject(new Pizza());
+	}
+	
+	@PostMapping("toevoegen")
+	ModelAndView toevoegen(@Valid Pizza pizza, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView(TOEVOEGEN_VIEW);
+		}
+		pizzaService.create(pizza);
+		return new ModelAndView(REDIRECT_URL_NA_TOEVOEGEN);
 	}
 }

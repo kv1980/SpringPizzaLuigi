@@ -2,9 +2,16 @@ package be.vdab.pizzaluigi.entities;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class Pizza {
 	private long id;
+	@NotBlank
 	private String naam;
+	@NotNull 
+	@Min(0)
 	private BigDecimal prijs;
 	private boolean pikant;
 	
@@ -26,6 +33,18 @@ public class Pizza {
 	
 	public void setId(long id) {
 		this.id = id;
+	}	
+
+	public void setNaam(String naam) {
+		this.naam = naam;
+	}
+
+	public void setPrijs(BigDecimal prijs) {
+		this.prijs = prijs;
+	}
+
+	public void setPikant(boolean pikant) {
+		this.pikant = pikant;
 	}
 
 	public long getId() {
