@@ -20,7 +20,13 @@ import be.vdab.pizzaluigi.valueobjects.Persoon;
 @RequestMapping("/") 		
 class IndexController {
 	private final AtomicInteger aantalKeerBekeken = new AtomicInteger();
+	private final Identificatie identificatie;
 	
+	public IndexController(Identificatie identificatie) {
+		super();
+		this.identificatie = identificatie;
+	}
+
 	@GetMapping 			
 	ModelAndView index(@CookieValue(name="laatstBezocht",required=false) String laatstBezocht, HttpServletResponse response) {
 		String boodschap;
@@ -42,6 +48,7 @@ class IndexController {
 		if (laatstBezocht != null) {
 			modelAndView.addObject("laatstBezocht",laatstBezocht);
 		}
+		modelAndView.addObject("identificatie",identificatie);
 		return modelAndView;
 	}
 }

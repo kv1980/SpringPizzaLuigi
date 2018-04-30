@@ -6,8 +6,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.SafeHtml;
+
 public class Pizza {
 	private long id;
+	@SafeHtml
 	@NotBlank
 	private String naam;
 	@NotNull 
