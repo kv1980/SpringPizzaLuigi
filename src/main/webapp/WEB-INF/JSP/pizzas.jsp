@@ -11,6 +11,9 @@
 	</head>
 	<body>
 		<c:import url='/WEB-INF/JSP/menu.jsp'/>
+		<c:if test='${not empty param.boodschap}'>
+			<div class='boodschap'>${param.boodschap}</div>
+		</c:if>
 		<h1>Pizza's</h1>
 		<c:forEach var='index' begin='1' end='4'>
 			&#9733; <%-- de HTML code van een symbool ster --%>
