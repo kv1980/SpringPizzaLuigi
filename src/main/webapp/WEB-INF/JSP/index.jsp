@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags' %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,7 +25,7 @@
 				
 	</dl>
 	<c:if test='${not empty laatstBezocht }'>
-		<p>Je bezocht onze website laatst op ${laatstBezocht}.</p>
+		<p>Je bezocht onze website laatst op <spring:eval expression='laatstBezocht.waarde'/>.</p>
 	</c:if>
 	<p>Deze pagina werd ${aantalKeerBekeken} keer bekeken.</p>
 	<p>${identificatie.emailAdres}</p>

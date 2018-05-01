@@ -20,7 +20,7 @@
 		</c:forEach>
 		<ul class='zebra'>
 			<c:forEach var='pizza' items='${pizzas}'>
-			<li>${pizza.id} : <c:out value='${pizza.naam}'/> ${pizza.prijs} &euro; 
+			<li>${pizza.id} : <c:out value='${pizza.naam}'/> <spring:eval expression='pizza.prijs'/> &euro; 
 				${pizza.pikant ? "&#9889; PIKANT &#9889;" : " niet pikant"} 
 				<spring:url value='pizzas/{id}' var='url'>
 					<spring:param name='id' value='${pizza.id}'/>
