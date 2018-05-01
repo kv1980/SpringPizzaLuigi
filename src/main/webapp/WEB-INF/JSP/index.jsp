@@ -1,17 +1,14 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags' %>
+<%@taglib prefix='vdab' uri='http://vdab.be/tags'%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang='nl'>
-<head>
-	<c:import url='/WEB-INF/JSP/head.jsp'>
- 		<c:param name='title' value="Pizza Luigi's welkom"/> 
-	</c:import>
-</head>
+<vdab:head title="Welkom"/>
 <body>
-	<c:import url='/WEB-INF/JSP/menu.jsp'/>
+	<vdab:menu/>
 	<h1>Welkom bij Pizza Luigi</h1>
 	<img src='<c:url value="/images/pizza.jpg"/>' alt='pizza' class='fullwidth'>
 	<h2>${boodschap}</h2>
