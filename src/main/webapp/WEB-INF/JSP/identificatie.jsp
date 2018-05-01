@@ -13,7 +13,7 @@
 </head>
 <body>
 	<c:import url='/WEB-INF/JSP/menu.jsp'/>
-	<h1>Toevoegen</h1>
+	<h1>Log in met uw emailadres</h1>
 	<c:url value='/identificatie' var='url'/>
 	<form:form action='${url}' modelAttribute='identificatie' method='post' id='identificatieForm'>
 		<form:label path='emailAdres'>Emailadres: <form:errors path='emailAdres'/></form:label>
